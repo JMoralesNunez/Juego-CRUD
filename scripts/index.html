@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUDY - Sistema de Entrenamiento</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+
+</head>
+<body>
+    <div class="fondo-glitch"></div>
+
+    <audio id="bgMusic" class="audio-element" loop>
+        <source src="../assets/audio/fondo1.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="buttonSound" class="audio-element">
+        <source src="../assets/sfx/buttons.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="soundButton">
+        <i class="fas fa-volume-up"></i>
+    </div>
+
+    <div id="story-screen" class="story-screen">
+        <div class="story-content">
+            <h1 id="story-title" class="story-title"></h1>
+            <div id="story-text" class="story-text"></div>
+            <button id="start-level-btn" class="start-level-btn">Comenzar Nivel</button>
+        </div>
+    </div>
+
+    <div id="main-page">
+        <header class="main-header">
+            <div class="container">
+                <h1 class="game-logo">
+                    <span class="letra-goteo">C</span>
+                    <span class="letra-goteo">R</span>
+                    <span class="letra-goteo">U</span>
+                    <span class="letra-goteo">D</span>
+                    <span class="letra-goteo">Y</span>
+                </h1>
+                <p class="game-subtitle">Sistema de Entrenamiento en Programación</p>
+                <p class="game-description">
+                    Los TL han sido corrompidos por CRUDY. Navega a través de niveles de desafíos de programación
+                    para recuperar el control del sistema y restaurar el orden en el código.
+                </p>
+            </div>
+        </header>
+
+        <section class="levels-container">
+            <div class="container">
+                <h2 class="section-title">NIVELES DE ENTRENAMIENTO</h2>
+
+                <div class="row g-4">
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="level-card enabled" id="level1-card" onclick="playButtonSound(); showStory(1)">
+                            <div class="level-card-image">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="level-card-body">
+                                <div class="level-number">Nivel 01</div>
+                                <h3 class="level-title">El Piso de los Jueces</h3>
+                                <p class="level-description">
+                                    Enfrenta a los profesores corrompidos por CRUDY.
+                                    Supera 3 desafíos de programación básica.
+                                </p>
+                                <div class="level-status">
+                                    <span class="status-badge status-enabled">Disponible</span>
+                                    <div class="level-difficulty">
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="level-card" id="level2-card" onclick="playButtonSound(); showStory(2)">
+                            <div class="level-card-image">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="level-card-body">
+                                <div class="level-number">Nivel 02</div>
+                                <h3 class="level-title">Las Gradas del Olvido</h3>
+                                <p class="level-description">
+                                    Desafío avanzado de arrays y estructuras de datos
+                                    contaminadas por CRUDY.
+                                </p>
+                                <div class="level-status">
+                                    <span class="status-badge status-locked">Bloqueado</span>
+                                    <div class="level-difficulty">
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="level-card" id="level3-card" onclick="playButtonSound(); showStory(3)">
+                            <div class="level-card-image">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="level-card-body">
+                                <div class="level-number">Nivel 03</div>
+                                <h3 class="level-title">Laboratorio de Algoritmos</h3>
+                                <p class="level-description">
+                                    Los algoritmos han sido saboteados.
+                                    Restaura la lógica del sistema.
+                                </p>
+                                <div class="level-status">
+                                    <span class="status-badge status-locked">Bloqueado</span>
+                                    <div class="level-difficulty">
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="level-card" id="level4-card" onclick="playButtonSound(); showStory(4)">
+                            <div class="level-card-image">
+                                <i class="fas fa-labyrinth"></i>
+                            </div>
+                            <div class="level-card-body">
+                                <div class="level-number">Nivel 04</div>
+                                <h3 class="level-title">Laberinto de la Lógica Rota</h3>
+                                <p class="level-description">
+                                    Navega por un laberinto de código roto.
+                                    Restaura la lógica perdida.
+                                </p>
+                                <div class="level-status">
+                                    <span class="status-badge status-locked">Bloqueado</span>
+                                    <div class="level-difficulty">
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="level-card" id="level5-card" onclick="playButtonSound(); showStory(5)">
+                            <div class="level-card-image">
+                                <i class="fas fa-ghost"></i>
+                            </div>
+                            <div class="level-card-body">
+                                <div class="level-number">Nivel 05</div>
+                                <h3 class="level-title">Repositorio Fantasma</h3>
+                                <p class="level-description">
+                                    El commit final. Reconstruye el CRUD distorsionado.
+                                </p>
+                                <div class="level-status">
+                                    <span class="status-badge status-locked">Bloqueado</span>
+                                    <div class="level-difficulty">
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                        <i class="fas fa-skull"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="game-page-level1" class="game-page">
+        <div class="game-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="game-title">NIVEL 1 - EL PISO DE LOS JUECES</h1>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="lives-container justify-content-end">
+                            <span class="text-white me-2">Vidas:</span>
+                            <div id="livesDisplayLevel1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <h3 class="progress-title">Progreso del Nivel 1</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-level1" style="width: 0%"></div>
+            </div>
+            <p class="progress-text" id="progress-text-level1">0/3 desafíos completados</p>
+        </div>
+
+        <div id="challenge1" class="game-card">
+            <div class="challenge-container">
+                <div class="challenge-content">
+                    <h3 class="challenge-title">Desafío 1: Variables - Robin</h3>
+                    <div class="challenge-description">
+                        <p><strong>Situación:</strong> Robin, el <strong>Defensor del Código Puro</strong>, ha
+                            corrompido las variables en este código.</p>
+                        <p>¿Puedes identificar qué imprimirá este código?</p>
+
+                        <div class="code-block">
+                            let x = 5;
+                            let y = 10;
+                            let z = x + y;
+                            x = 20;
+                            console.log(z);</div>
+                    </div>
+
+                    <div class="options-container">
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">A) 15</div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">B) 20</div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">C) 30</div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">D) Error</div>
+                    </div>
+
+                    <button class="validate-btn" onclick="playButtonSound(); validateChallenge(1)">
+                        <i class="fas fa-check"></i> Validar Respuesta
+                    </button>
+
+                    <div id="feedback1" class="feedback"></div>
+                </div>
+
+                <div class="professor-image">
+                    <img src="../assets/img/robin.jpg" alt="Robin - Defensor del Código Puro">
+                </div>
+            </div>
+        </div>
+
+        <div id="challenge2" class="game-card">
+            <div class="challenge-container">
+                <div class="challenge-content">
+                    <h3 class="challenge-title">Desafío 2: Condicionales - Anthony</h3>
+                    <div class="challenge-description">
+                        <p><strong>Situación:</strong> Anthony, <strong>The DOM Reaper</strong>, ha alterado este
+                            código.</p>
+                        <p>¿Qué mensaje imprimirá?</p>
+
+                        <div class="code-block">let edad = 18;
+                            let tieneLicencia = true;
+
+                            if (edad >= 18 && tieneLicencia) {
+                            console.log("Puede conducir");
+                            } else if (edad >= 18 && !tieneLicencia) {
+                            console.log("Necesita licencia");
+                            } else {
+                            console.log("Muy joven para conducir");
+                            }</div>
+                    </div>
+
+                    <div class="options-container">
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">A) Puede conducir</div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">B) Necesita licencia</div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">C) Muy joven para conducir
+                        </div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">D) Error</div>
+                    </div>
+
+                    <button class="validate-btn" onclick="playButtonSound(); validateChallenge(2)">
+                        <i class="fas fa-check"></i> Validar Respuesta
+                    </button>
+
+                    <div id="feedback2" class="feedback"></div>
+                </div>
+
+                <div class="professor-image">
+                    <img src="../assets/img/antony.jpg" alt="Anthony - The DOM Reaper">
+                </div>
+            </div>
+        </div>
+
+        <div id="challenge3" class="game-card">
+            <div class="challenge-container">
+                <div class="challenge-content">
+                    <h3 class="challenge-title">Desafío 3: Bucles - Ramiro</h3>
+                    <div class="challenge-description">
+                        <p><strong>Situación:</strong> Ramiro, <strong>El Loop Eterno</strong>, ha modificado este
+                            bucle.</p>
+                        <p>¿Cuántas veces se ejecutará?</p>
+
+                        <div class="code-block">let contador = 0;
+                            for (let i = 0; i < 5; i++) { contador++; if (i===3) break; } console.log(contador);</div>
+                    </div>
+
+                    <div class="options-container">
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">A) 3</div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">B) 4</div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">C) 5</div>
+                        <div class="option" onclick="playButtonSound(); selectOption(this)">D) 6</div>
+                    </div>
+
+                    <button class="validate-btn" onclick="playButtonSound(); validateChallenge(3)">
+                        <i class="fas fa-check"></i> Validar Respuesta
+                    </button>
+
+                    <div id="feedback3" class="feedback"></div>
+                </div>
+
+                <div class="professor-image">
+                    <img src="../assets/img/ramiro.jpg" alt="Ramiro - El Loop Eterno">
+                </div>
+            </div>
+        </div>
+
+        <div id="victory-level1" class="victory-screen" style="display: none;">
+            <h2 class="victory-title">¡NIVEL 1 COMPLETADO!</h2>
+            <div class="lives-container" style="justify-content: center; margin-bottom: 1.5rem;">
+                <i class="fas fa-heart heart"></i>
+                <span class="lives-count" id="remaining-lives-level1">5</span>
+            </div>
+            <p class="victory-message">
+                Has superado los 3 desafíos del Nivel 1 y recuperado las llaves del sistema.
+                ¡Ahora estás listo para enfrentar el próximo desafío en Las Gradas del Olvido!
+            </p>
+
+            <button class="next-level-btn" onclick="playButtonSound(); showStory(2)">
+                <i class="fas fa-arrow-right"></i> Avanzar al Nivel 2
+            </button>
+
+            <button class="back-btn" onclick="playButtonSound(); showMainPage()">
+                <i class="fas fa-home"></i> Volver al Menú Principal
+            </button>
+        </div>
+    </div>
+
+    <div id="game-page-level2" class="game-page">
+        <div class="game-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="game-title">NIVEL 2 - LAS GRADAS DEL OLVIDO</h1>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="lives-container justify-content-end">
+                            <span class="text-white me-2">Vidas:</span>
+                            <div id="livesDisplayLevel2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="challenge-level2" class="game-card">
+            <h3 class="challenge-title">Desafío Avanzado: Arrays y Métodos</h3>
+            <div class="challenge-description">
+                <p><strong>Situación:</strong> CRUDY ha corrompido este array de datos.</p>
+                <p>¿Puedes determinar qué imprimirá este código?</p>
+
+                <div class="code-block">const productos = [
+                    {id: 1, nombre: "Laptop", precio: 1200, stock: 5},
+                    {id: 2, nombre: "Smartphone", precio: 800, stock: 10},
+                    {id: 3, nombre: "Tablet", precio: 500, stock: 8},
+                    {id: 4, nombre: "Monitor", precio: 300, stock: 15},
+                    {id: 5, nombre: "Teclado", precio: 100, stock: 20}
+                    ];
+
+                    // Función corrompida por CRUDY
+                    const resultado = productos
+                    .filter(p => p.precio > 400)
+                    .map(p => ({
+                    ...p,
+                    precioConDescuento: p.precio * 0.9
+                    }))
+                    .reduce((total, p) => total + p.precioConDescuento, 0);
+
+                    console.log(resultado);</div>
+            </div>
+
+            <div class="options-container">
+                <div class="option" onclick="playButtonSound(); selectOption(this)">A) 1530</div>
+                <div class="option" onclick="playButtonSound(); selectOption(this)">B) 1800</div>
+                <div class="option" onclick="playButtonSound(); selectOption(this)">C) 1980</div>
+                <div class="option" onclick="playButtonSound(); selectOption(this)">D) 2200</div>
+            </div>
+
+            <button class="validate-btn" onclick="playButtonSound(); validateLevel2()">
+                <i class="fas fa-check"></i> Validar Respuesta
+            </button>
+
+            <div id="feedback-level2" class="feedback"></div>
+        </div>
+
+        <div id="victory-level2" class="victory-screen" style="display: none;">
+            <h2 class="victory-title">¡NIVEL 2 COMPLETADO!</h2>
+            <div class="lives-container" style="justify-content: center; margin-bottom: 1.5rem;">
+                <i class="fas fa-heart heart"></i>
+                <span class="lives-count" id="remaining-lives-level2">5</span>
+            </div>
+            <p class="victory-message">
+                Has superado el desafío avanzado de Las Gradas del Olvido y recuperado los datos corrompidos por
+                CRUDY.
+                ¡Felicidades! Has restaurado el orden en el sistema de programación.
+            </p>
+
+            <button class="next-level-btn" onclick="playButtonSound(); showStory(3)">
+                <i class="fas fa-arrow-right"></i> Avanzar al Nivel 3
+            </button>
+
+            <button class="back-btn" onclick="playButtonSound(); showMainPage()">
+                <i class="fas fa-home"></i> Volver al Menú Principal
+            </button>
+        </div>
+    </div>
+
+    <div id="game-page-level3" class="game-page">
+        <div class="game-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="game-title">NIVEL 3 – LABORATORIO DE ALGORITMOS</h1>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="lives-container justify-content-end">
+                            <span class="text-white me-2">Vidas:</span>
+                            <div id="livesDisplayLevel3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="challenge-level3" class="level">
+            <h1>Nivel 3 - Zona de Juegos: CRITICAL HIT</h1>
+            <p>Subes al tercer piso. La zona de juegos… no está vacía. CRUDY la ha convertido en un espacio glitcheado, con playstations oxidadas, fichas que tiemblan en la mesa de billar, y una pantalla gigante que dice “PRESS ANY KEY TO SCREAM”.</p>
+            <div class="game">
+                <h2>¿Qué devuelve este código?</h2>
+                <div class="game__options">
+                    <pre id="code-level3" class="code"></pre>
+                    <div id="options-level3" class="options"></div>
+                    <p id="result-level3" class="result"></p>
+                    <button id="next-level3" class="next-btn"></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="victory-level3" class="victory-screen" style="display: none;">
+            <h2 class="victory-title">¡NIVEL 3 COMPLETADO!</h2>
+            <div class="lives-container" style="justify-content: center; margin-bottom: 1.5rem;">
+                <i class="fas fa-heart heart"></i>
+                <span class="lives-count" id="remaining-lives-level3">5</span>
+            </div>
+            <p class="victory-message">
+                Has restaurado los algoritmos corrompidos por CRUDY.
+                ¡Felicidades! El sistema está más cerca de ser liberado.
+            </p>
+
+            <button class="next-level-btn" onclick="playButtonSound(); showStory(4)">
+                <i class="fas fa-arrow-right"></i> Avanzar al Nivel 4
+            </button>
+
+            <button class="back-btn" onclick="playButtonSound(); showMainPage()">
+                <i class="fas fa-home"></i> Volver al Menú Principal
+            </button>
+        </div>
+    </div>
+
+    <div id="game-page-level4" class="game-page">
+        <div class="game-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="game-title">NIVEL 4 - LABERINTO DE LA LÓGICA ROTA</h1>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="lives-container justify-content-end">
+                            <span class="text-white me-2">Vidas:</span>
+                            <div id="livesDisplayLevel4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="challenge-level4" class="level-game">
+            <h2>Nivel 4 - El laberinto de la Lógica Rota</h2>
+            <pre id="texto-nivel4" class="story-text"></pre>
+            <div id="botones-nivel4" class="options"></div>
+            <p id="result-level4" class="result"></p> <button id="validate-level4-btn" class="validate-btn mt-3" style="display:none;"></button> </div>
+
+        <div id="victory-level4" class="victory-screen" style="display: none;">
+            <h2 class="victory-title">¡NIVEL 4 COMPLETADO!</h2>
+            <div class="lives-container" style="justify-content: center; margin-bottom: 1.5rem;">
+                <i class="fas fa-heart heart"></i>
+                <span class="lives-count" id="remaining-lives-level4">5</span>
+            </div>
+            <p class="victory-message">
+                Has navegado exitosamente por el laberinto de lógica rota.
+                ¡Solo queda un nivel para liberar el sistema de CRUDY!
+            </p>
+
+            <button class="next-level-btn" onclick="playButtonSound(); showStory(5)">
+                <i class="fas fa-arrow-right"></i> Avanzar al Nivel 5
+            </button>
+
+            <button class="back-btn" onclick="playButtonSound(); showMainPage()">
+                <i class="fas fa-home"></i> Volver al Menú Principal
+            </button>
+        </div>
+    </div>
+
+    <div id="game-page-level5" class="game-page">
+        <div class="game-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="game-title">NIVEL 5 - REPOSITORIO FANTASMA</h1>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="lives-container justify-content-end">
+                            <span class="text-white me-2">Vidas:</span>
+                            <div id="livesDisplayLevel5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="challenge-level5" class="level">
+            <h1>Nivel 5 - Repositorio Fantasma: El Commit Final</h1>
+            <p>En este nivel, el jugador debe reconstruir un CRUD distorsionado, en el que cada acción desencadena un efecto mental:</p>
+            <div class="game">
+                <h2>Elige la opción correcta</h2>
+                <div class="game__options">
+                    <pre id="code-level5" class="code"></pre>
+                    <div id="options-level5" class="options"></div>
+                    <p id="result-level5" class="result"></p>
+                    <button id="next-level5" class="next-btn"></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="victory-final" class="victory-screen" style="display: none;">
+            <h2 class="victory-title">¡HAS DERROTADO A CRUDY!</h2>
+            <div class="lives-container" style="justify-content: center; margin-bottom: 1.5rem;">
+                <i class="fas fa-heart heart"></i>
+                <span class="lives-count" id="remaining-lives-final">5</span>
+            </div>
+            <p class="victory-message">
+                Has completado todos los niveles y liberado el sistema de la corrupción de CRUDY.
+                ¡Felicidades, programador! Has restaurado el orden en el código.
+            </p>
+
+            <button class="next-level-btn" onclick="playButtonSound(); restartGame()">
+                <i class="fas fa-redo"></i> Jugar de Nuevo
+            </button>
+
+            <button class="back-btn" onclick="playButtonSound(); showMainPage()">
+                <i class="fas fa-home"></i> Volver al Menú Principal
+            </button>
+        </div>
+    </div>
+
+    <div id="game-over" class="game-over-screen" style="display: none;">
+        <h2 class="game-over-title">¡GAME OVER!</h2>
+        <div class="lives-container" style="justify-content: center; margin-bottom: 1.5rem;">
+            <i class="fas fa-heart heart"></i>
+            <span class="lives-count">0</span>
+        </div>
+        <p class="game-over-message">
+            Has perdido todas tus vidas. CRUDY ha tomado el control completo del sistema.
+            ¡Pero no te rindas! Inténtalo de nuevo y demuestra que puedes vencer al virus.
+        </p>
+
+        <button class="restart-btn" onclick="playButtonSound(); restartGame()">
+            <i class="fas fa-redo"></i> Reiniciar Juego
+        </button>
+
+        <button class="back-btn" onclick="playButtonSound(); showMainPage()">
+            <i class="fas fa-home"></i> Volver al Menú Principal
+        </button>
+    </div>
+
+    
+<script src="../scripts/script.js"></script> para que cargue tu archivo script.js
+</body>
+</html>

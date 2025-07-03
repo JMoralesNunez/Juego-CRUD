@@ -1,0 +1,618 @@
+/* Variables de color */
+        :root {
+            --primary-black: #000000;
+            --primary-red: #dc2626;
+            --blood-red: #a00000;
+            --dark-red: #6d0101;
+            --secondary-white: #ffffff;
+            --secondary-gray: #6b7280;
+            --secondary-green: #16a34a;
+            --accent-blue: #3b82f6;
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: var(--primary-black);
+            color: var(--primary-red);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fondo con efecto glitch */
+        .fondo-glitch {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../assets/img/bg1.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            animation: flicker 1.8s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Tipografía especial */
+        @font-face {
+            font-family: 'Bloody';
+            src: url('../assets/fonts/BLOODY.TTF') format('truetype'); /* Hosted font */
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Efecto de letras sangrantes */
+        .letra-goteo {
+            position: relative;
+            display: inline-block;
+        }
+
+        .letra-goteo::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 2px;
+            height: 0px;
+            background: #f00;
+            transform: translateX(-50%);
+            opacity: 0.7;
+            animation: derramar 2.6s infinite ease-in-out;
+            box-shadow: 0 0 6px #f00, 0 0 3px #900;
+        }
+
+        .letra-goteo:nth-child(odd)::after { animation-delay: 0.4s; }
+        .letra-goteo:nth-child(even)::after { animation-delay: 1.2s; }
+
+        @keyframes derramar {
+            0% { height: 0px; opacity: 0; }
+            20% { opacity: 0.6; }
+            50% { height: 30vh; }
+            70% { height: 60vh; opacity: 0.5; }
+            90% { height: 100vh; opacity: 0.2; }
+            100% { height: 0px; opacity: 0; }
+        }
+
+        /* Header Principal */
+        .main-header {
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 3px solid var(--blood-red);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .game-logo {
+            font-family: 'Bloody', sans-serif;
+            font-size: 4rem;
+            font-weight: normal;
+            color: var(--blood-red);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .game-subtitle {
+            font-size: 1.2rem;
+            color: var(--dark-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .game-description {
+            font-size: 1rem;
+            color: var(--secondary-white);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Sección de Niveles */
+        .levels-container {
+            padding: 4rem 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Bloody', sans-serif;
+            font-size: 2.5rem;
+            color: var(--blood-red);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--blood-red);
+        }
+
+        /* Tarjetas de nivel */
+        .level-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid var(--dark-red);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .level-card.enabled {
+            border-color: var(--blood-red);
+            box-shadow: 0 0 20px rgba(160, 0, 0, 0.3);
+        }
+
+        .level-card.enabled:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(160, 0, 0, 0.4);
+        }
+
+        .level-card.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            filter: grayscale(1);
+        }
+
+        .level-card-image {
+            height: 200px;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-card-image i {
+            font-size: 4rem;
+            color: var(--blood-red);
+            z-index: 2;
+        }
+
+        .level-card-body {
+            padding: 1.5rem;
+        }
+
+        .level-number {
+            font-size: 0.9rem;
+            color: var(--blood-red);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-title {
+            font-size: 1.3rem;
+            color: var(--secondary-white);
+            margin-bottom: 1rem;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        .level-description {
+            color: var(--secondary-gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .level-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-enabled {
+            background: var(--blood-red);
+            color: var(--secondary-white);
+        }
+
+        .status-locked {
+            background: var(--secondary-gray);
+            color: var(--secondary-white);
+        }
+
+        /* Botones */
+        button, .btn {
+            background: transparent;
+            border: 2px solid var(--dark-red);
+            color: var(--dark-red);
+            font-family: monospace;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        button:hover, .btn:hover {
+            background: var(--blood-red);
+            color: var(--primary-black);
+        }
+
+        .validate-btn {
+            background: var(--blood-red);
+            border: none;
+            color: white;
+        }
+
+        .validate-btn:hover {
+            background: #c82333;
+            color: white;
+        }
+
+        /* Páginas de juego */
+        .game-page {
+            display: none;
+            min-height: 60vh;
+            position: relative;
+            z-index: 2;
+        }
+
+        .game-header {
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 2px solid var(--blood-red);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .game-title {
+            font-family: 'Bloody', sans-serif;
+            font-size: 1.8rem;
+            color: var(--blood-red);
+        }
+
+        .heart {
+            color: var(--blood-red);
+            font-size: 1.5rem;
+        }
+
+        /* Contenedor de desafío */
+        .challenge-container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .challenge-content {
+            flex: 2;
+        }
+
+        .professor-image {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .professor-image img {
+            max-width: 100%;
+            max-height: 600px;
+            border: 2px solid var(--blood-red);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(160, 0, 0, 0.5);
+        }
+
+        .game-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid var(--blood-red);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 100%;
+        }
+
+        .challenge-title {
+            color: var(--blood-red);
+            font-family: 'Bloody', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 2px solid var(--dark-red);
+            padding-bottom: 10px;
+        }
+
+        .challenge-description {
+            margin-bottom: 1.5rem;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        .challenge-description strong {
+            color: var(--blood-red);
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            color: #c9d1d9;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre;
+        }
+
+        .options-container, .options { /* Unified styles for all options containers */
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .option {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--dark-red);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #f1f1f1;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--blood-red);
+            background: rgba(160, 0, 0, 0.1);
+        }
+
+        .option.selected {
+            border-color: var(--blood-red);
+            background: rgba(160, 0, 0, 0.2);
+        }
+
+        .option::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--dark-red);
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .option.selected::before {
+            background-color: var(--blood-red);
+        }
+
+        /* Pantallas de victoria/derrota */
+        .victory-screen, .game-over-screen {
+            text-align: center;
+            padding: 3rem;
+            max-width: 700px;
+            margin: 2rem auto;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid var(--blood-red);
+            border-radius: 15px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .victory-title, .game-over-title {
+            color: var(--blood-red);
+            font-family: 'Bloody', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .next-level-btn, .restart-btn {
+            background: var(--blood-red);
+            border: none;
+            color: white;
+        }
+
+        /* Progreso */
+        .progress-container {
+            max-width: 100%;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid var(--blood-red);
+            border-radius: 10px;
+        }
+
+        .progress-title {
+            color: var(--blood-red);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--blood-red);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-logo { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .level-card-image { height: 150px; }
+            .level-card-image i { font-size: 3rem; }
+            .challenge-container { flex-direction: column; }
+            .professor-image { margin-top: 20px; }
+        }
+
+        /* Efecto de sonido */
+        #soundButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--blood-red);
+            color: var(--blood-red);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Elementos de audio ocultos */
+        .audio-element { display: none; }
+
+        .feedback, .result { /* Unified feedback/result styles */
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            display: none; /* Hidden by default */
+        }
+
+        .feedback.success, .result.success {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid var(--secondary-green);
+            color: var(--secondary-green);
+        }
+
+        .feedback.error, .result.error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        /* Estilos para niveles 3-5 */
+        .story-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 2rem;
+            color: white;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(30, 0, 0, 0.7);
+            border: 2px solid var(--blood-red);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .story-title {
+            font-family: 'Bloody', sans-serif;
+            font-size: 2.5rem;
+            color: var(--blood-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .story-binary {
+            font-family: monospace;
+            color: #0f0;
+            background: #000;
+            padding: 10px;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        .story-code, .code { /* Unified code block styles */
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            color: #c9d1d9;
+            overflow-x: auto;
+            text-align: left;
+        }
+
+        .start-level-btn {
+            background: var(--blood-red);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .start-level-btn:hover { background: #c82333; }
+
+        /* General level container for 3-5 */
+        .level {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid var(--blood-red);
+            border-radius: 15px;
+        }
+
+        .game__options {
+            margin-top: 2rem;
+        }
+
+        .next-btn {
+            background: var(--blood-red);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
